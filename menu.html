@@ -1,0 +1,234 @@
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; color: #1E293B; overflow-x: hidden; }
+        #preloader { position: fixed; inset: 0; z-index: 99999; background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease, visibility 0.8s; }
+        #preloader.hidden-preloader { opacity: 0; visibility: hidden; }
+        .spinner-ring { border: 4px solid #EFF6FF; border-left-color: #1D4ED8; border-radius: 50%; width: 60px; height: 60px; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        #page-transition { position: fixed; inset: 0; background: #0F172A; z-index: 99990; transform: translateY(100%); transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1); }
+        #page-transition.active { transform: translateY(0); }
+        .page-view { display: none; opacity: 0; animation: fadeInPage 0.8s ease-out forwards; }
+        .page-view.active { display: block; }
+        @keyframes fadeInPage { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        #reading-progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #3B82F6, #8B5CF6); z-index: 9999; width: 0%; transition: width 0.1s; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #EFF6FF; }
+        ::-webkit-scrollbar-thumb { background: #94A3B8; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #1D4ED8; }
+        .nav-transparent { background: rgba(15, 23, 42, 0.1); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); box-shadow: none; }
+        .nav-solid { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(226, 232, 240, 0.8); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1); }
+        .nav-link-anim { position: relative; }
+        .nav-link-anim::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #1D4ED8; transition: width 0.3s ease; }
+        .nav-link-anim:hover::after, .nav-link-anim.active-link::after { width: 100%; }
+        .reveal { opacity: 0; visibility: hidden; transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.fade-up { transform: translateY(50px); }
+        .reveal.fade-left { transform: translateX(-50px); }
+        .reveal.fade-right { transform: translateX(50px); }
+        .reveal.active { opacity: 1; visibility: visible; transform: translate(0) scale(1); }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .premium-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .premium-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px -15px rgba(29, 78, 216, 0.2); }
+        .image-container { overflow: hidden; border-radius: 1rem; }
+        .image-container img { transition: transform 0.7s ease; }
+        .image-container:hover img { transform: scale(1.05); }
+        .float-slow { animation: floatAnim 6s ease-in-out infinite; }
+        .float-fast { animation: floatAnim 4s ease-in-out infinite reverse; }
+        @keyframes floatAnim { 0% { transform: translateY(0); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0); } }
+        .hero-gradient { background: linear-gradient(to right, rgba(15, 23, 42, 0.9), rgba(29, 78, 216, 0.6)); }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <i class="fa-solid fa-heart-pulse text-medico-azul text-5xl mb-4 animate-pulse"></i>
+        <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight mb-6">SUMAK ÑAN</h2>
+        <div class="spinner-ring"></div>
+    </div>
+    <div id="page-transition"></div>
+    <div id="reading-progress"></div>
+
+    <!-- Navbar -->
+    <header id="main-nav" class="fixed w-full top-0 z-50 transition-all duration-500 nav-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer group" onclick="navigate('#inicio')">
+                    <div class="w-10 h-10 bg-medico-azul rounded-lg flex items-center justify-center mr-3 shadow-lg group-hover:bg-blue-700 transition duration-300">
+                        <i class="fa-solid fa-heart-pulse text-white text-xl"></i>
+                    </div>
+                    <div><h1 id="logo-text" class="font-extrabold text-2xl tracking-tight text-white transition-colors duration-300">SUMAK ÑAN</h1></div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden xl:flex space-x-6 items-center">
+                    <a href="#inicio" class="nav-link nav-link-anim text-white font-medium text-sm transition-colors duration-300">Inicio</a>
+                    <a href="#nosotros" class="nav-link nav-link-anim text-white font-medium text-sm transition-colors duration-300">Nosotros</a>
+                    <a href="#que-es" class="nav-link nav-link-anim text-white font-medium text-sm transition-colors duration-300">¿Qué es?</a>
+                    <a href="#causas" class="nav-link nav-link-anim text-white font-medium text-sm transition-colors duration-300">Causas</a>
+                    
+                    <!-- Dropdown Riesgos -->
+                    <div class="relative group">
+                        <button class="nav-dropdown-btn text-white font-medium text-sm transition-colors duration-300 flex items-center nav-link-anim">
+                            Riesgos <i class="fa-solid fa-chevron-down ml-1 text-[10px]"></i>
+                        </button>
+                        <div class="absolute left-0 mt-4 w-64 rounded-xl shadow-xl bg-white border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                            <div class="p-2 space-y-1">
+                                <a href="#riesgos-madre" class="block px-4 py-2 text-sm text-slate-700 hover:bg-medico-celeste hover:text-medico-azul rounded-lg transition"><i class="fa-solid fa-female w-5"></i> Riesgos para la madre</a>
+                                <a href="#riesgos-bebe" class="block px-4 py-2 text-sm text-slate-700 hover:bg-medico-celeste hover:text-medico-azul rounded-lg transition"><i class="fa-solid fa-baby-carriage w-5"></i> Riesgos para el bebé</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Prevención -->
+                    <div class="relative group">
+                        <button class="nav-dropdown-btn text-white font-medium text-sm transition-colors duration-300 flex items-center nav-link-anim">
+                            Prevención <i class="fa-solid fa-chevron-down ml-1 text-[10px]"></i>
+                        </button>
+                        <div class="absolute left-0 mt-4 w-64 rounded-xl shadow-xl bg-white border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                            <div class="p-2 space-y-1">
+                                <a href="#prevencion" class="block px-4 py-2 text-sm text-slate-700 hover:bg-medico-celeste hover:text-medico-azul rounded-lg transition"><i class="fa-solid fa-shield-halved w-5"></i> Prevención</a>
+                                <a href="#recursos" class="block px-4 py-2 text-sm text-slate-700 hover:bg-medico-celeste hover:text-medico-azul rounded-lg transition"><i class="fa-solid fa-hand-holding-heart w-5"></i> Recursos</a>
+                                <a href="#urgencias" class="block px-4 py-2 text-sm text-alerta-rojo font-medium hover:bg-red-50 rounded-lg transition"><i class="fa-solid fa-truck-medical w-5"></i> Urgencias</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#contacto" class="bg-medico-azul hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 border border-blue-400/30">
+                        Contacto
+                    </a>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <div class="xl:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white focus:outline-none p-2"><i class="fa-solid fa-bars text-2xl"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden xl:hidden bg-white border-t border-slate-100 absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-1 h-[80vh] overflow-y-auto">
+                <a href="#inicio" class="mobile-link block px-4 py-3 rounded-lg text-sm font-semibold text-slate-700 hover:bg-medico-celeste">Inicio</a>
+                <a href="#nosotros" class="mobile-link block px-4 py-3 rounded-lg text-sm font-semibold text-slate-700 hover:bg-medico-celeste">Nosotros</a>
+                <a href="#que-es" class="mobile-link block px-4 py-3 rounded-lg text-sm font-semibold text-slate-700 hover:bg-medico-celeste">¿Qué es?</a>
+                <a href="#causas" class="mobile-link block px-4 py-3 rounded-lg text-sm font-semibold text-slate-700 hover:bg-medico-celeste">Causas</a>
+                <p class="px-4 pt-3 pb-1 text-xs font-bold text-slate-400 uppercase">Riesgos</p>
+                <a href="#riesgos-madre" class="mobile-link block px-4 py-2 text-sm text-slate-600 ml-2">Riesgos para la madre</a>
+                <a href="#riesgos-bebe" class="mobile-link block px-4 py-2 text-sm text-slate-600 ml-2">Riesgos para el bebé</a>
+                <p class="px-4 pt-3 pb-1 text-xs font-bold text-slate-400 uppercase">Prevención</p>
+                <a href="#prevencion" class="mobile-link block px-4 py-2 text-sm text-slate-600 ml-2">Prevención</a>
+                <a href="#recursos" class="mobile-link block px-4 py-2 text-sm text-slate-600 ml-2">Recursos</a>
+                <a href="#urgencias" class="mobile-link block px-4 py-2 text-sm font-bold text-alerta-rojo ml-2">Urgencias</a>
+                <div class="border-t border-slate-100 my-2"></div>
+                <a href="#contacto" class="mobile-link block px-4 py-3 mt-4 text-center rounded-xl text-sm font-bold bg-medico-azul text-white">Contacto</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <!-- INICIO -->
+        <div id="inicio" class="page-view active">
+            <section class="relative min-h-screen flex items-center justify-center bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1920');">
+                <div class="absolute inset-0 hero-gradient"></div>
+                <div class="absolute inset-0 overflow-hidden pointer-events-none z-10">
+                    <i class="fa-solid fa-plus float-slow absolute top-1/4 left-10 text-white/10 text-6xl"></i>
+                    <i class="fa-solid fa-shield-heart float-fast absolute bottom-1/4 right-20 text-blue-400/20 text-8xl"></i>
+                    <i class="fa-solid fa-capsules float-slow absolute top-1/3 right-1/4 text-white/5 text-4xl"></i>
+                </div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 pt-20">
+                    <div class="text-center max-w-4xl mx-auto reveal fade-up">
+                        <span class="inline-flex items-center py-1.5 px-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold uppercase tracking-widest mb-6">
+                            <i class="fa-solid fa-globe mr-2 text-blue-300"></i> Prevención y concientización
+                        </span>
+                        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight text-white tracking-tight">
+                            Riesgos del embarazo adolescente: <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-blue-100">peligros para la madre y el bebé</span>
+                        </h1>
+                        <p class="text-lg md:text-xl text-slate-200 mb-10 font-light leading-relaxed">
+                            La adolescencia es una etapa de cambios físicos, emocionales y sociales. Un embarazo durante esta etapa puede afectar la salud, la educación y el futuro de la madre y del bebé. Esta página tiene como finalidad informar y concienciar sobre los riesgos del embarazo adolescente y promover su prevención.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="navigate('#riesgos-madre')" class="bg-medico-azul hover:bg-blue-600 text-white font-bold py-4 px-10 rounded-full shadow-premium transition-all duration-300 hover:-translate-y-1">Conocer los riesgos</button>
+                            <button onclick="navigate('#prevencion')" class="bg-white/10 backdrop-blur-md hover:bg-white text-white hover:text-medico-azul font-bold py-4 px-10 rounded-full transition-all duration-300 border border-white/30">Aprender a prevenir</button>
+                            <button onclick="navigate('#recursos')" class="bg-white/10 backdrop-blur-md hover:bg-white text-white hover:text-medico-azul font-bold py-4 px-10 rounded-full transition-all duration-300 border border-white/30">Buscar ayuda</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce"><i class="fa-solid fa-angle-down text-white/70 text-3xl"></i></div>
+            </section>
+
+            <section class="py-12 bg-white relative z-30 -mt-8 mx-4 sm:mx-8 rounded-2xl shadow-xl border border-slate-100 max-w-6xl xl:mx-auto reveal fade-up delay-200">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-8 text-center">
+                    <div class="p-4 border-b md:border-b-0 md:border-r border-slate-100">
+                        <i class="fa-solid fa-chart-line text-4xl text-medico-azul mb-3"></i>
+                        <h4 class="text-5xl font-extrabold text-slate-800 mb-1"><span class="counter-value" data-target="20">0</span>%</h4>
+                        <p class="text-sm text-slate-500 font-medium uppercase">de embarazos en Ecuador son adolescentes</p>
+                    </div>
+                    <div class="p-4 border-b md:border-b-0 md:border-r border-slate-100">
+                        <i class="fa-solid fa-user-nurse text-4xl text-medico-morado mb-3"></i>
+                        <h4 class="text-5xl font-extrabold text-slate-800 mb-1"><span class="counter-value" data-target="70">0</span>%</h4>
+                        <p class="text-sm text-slate-500 font-medium uppercase">más riesgo de mortalidad materna</p>
+                    </div>
+                    <div class="p-4">
+                        <i class="fa-solid fa-school text-4xl text-medico-azulClaro mb-3"></i>
+                        <h4 class="text-5xl font-extrabold text-slate-800 mb-1"><span class="counter-value" data-target="60">0</span>%</h4>
+                        <p class="text-sm text-slate-500 font-medium uppercase">abandono escolar</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-24 bg-slate-50 overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col lg:flex-row gap-16 items-center">
+                        <div class="lg:w-1/2 relative reveal fade-right">
+                            <div class="absolute -inset-4 bg-gradient-to-tr from-blue-100 to-purple-100 rounded-[2rem] transform rotate-3"></div>
+                            <div class="image-container relative z-10 shadow-premium border-4 border-white rounded-[1.5rem]">
+                                <img src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&q=80&w=800" alt="Atención médica adolescente">
+                            </div>
+                            <div class="absolute -bottom-6 -right-6 bg-white p-5 rounded-2xl shadow-xl z-20 flex items-center border border-slate-50 animate-bounce" style="animation-duration: 3s;">
+                                <div class="bg-green-100 text-green-600 p-3 rounded-full mr-4"><i class="fa-solid fa-check-double text-xl"></i></div>
+                                <div><p class="text-xs text-slate-400 font-bold uppercase">Dato clave</p><p class="font-bold text-slate-800">Prevención salva vidas</p></div>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 reveal fade-left">
+                            <h2 class="text-4xl font-extrabold text-slate-800 mb-6 leading-tight">Un problema de salud pública</h2>
+                            <p class="text-slate-600 mb-6 text-lg leading-relaxed">El embarazo adolescente representa un desafío prioritario en la Sierra ecuatoriana. Miles de jóvenes enfrentan consecuencias físicas, emocionales y sociales que limitan su desarrollo y el de sus bebés. La información oportuna puede cambiar esta realidad.</p>
+                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 mb-8 border-l-4 border-l-medico-azul">
+                                <h4 class="font-bold text-slate-800 flex items-center mb-2"><i class="fa-solid fa-bell text-medico-azul mr-3"></i> Alerta epidemiológica</h4>
+                                <p class="text-slate-600 text-sm">Según la OMS, las complicaciones del embarazo y parto son la segunda causa de muerte en adolescentes de 15 a 19 años en el mundo.</p>
+                            </div>
+                            <button onclick="navigate('#que-es')" class="group flex items-center font-bold text-medico-azul bg-medico-celeste px-6 py-3 rounded-full hover:bg-blue-100 transition-colors">Conoce más <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-24 bg-white relative">
+                <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(#1D4ED8 1px, transparent 1px); background-size: 30px 30px;"></div>
+                <div class="max-w-7xl mx-auto px-4 relative z-10">
+                    <div class="text-center mb-16 reveal fade-up">
+                        <span class="text-medico-azul font-bold tracking-widest uppercase text-sm mb-2 block">Información clave</span>
+                        <h2 class="text-4xl font-extrabold text-slate-800 mb-4">¿Qué necesitas saber?</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="bg-white rounded-2xl shadow-lg border flex flex-col h-full premium-card reveal fade-up delay-100 overflow-hidden">
+                            <div class="image-container h-48"><img src="https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover"></div>
+                            <div class="p-8 flex-grow"><div class="bg-red-50 text-alerta-rojo w-10 h-10 rounded-lg flex items-center justify-center mb-4 -mt-12"><i class="fa-solid fa-female"></i></div><h3 class="text-xl font-bold mb-3">Riesgos para la madre</h3><p class="text-slate-500 text-sm mb-6">Anemia, preeclampsia, parto prematuro.</p><button onclick="navigate('#riesgos-madre')" class="w-full bg-slate-50 py-3 rounded-xl hover:bg-medico-azul hover:text-white transition">Ver más</button></div>
+                        </div>
+                        <div class="bg-white rounded-2xl shadow-lg border flex flex-col h-full premium-card reveal fade-up delay-200 overflow-hidden">
+                            <div class="image-container h-48"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover"></div>
+                            <div class="p-8 flex-grow"><div class="bg-blue-50 text-medico-azul w-10 h-10 rounded-lg flex items-center justify-center mb-4 -mt-12"><i class="fa-solid fa-baby-carriage"></i></div><h3 class="text-xl font-bold mb-3">Riesgos para el bebé</h3><p class="text-slate-500 text-sm mb-6">Bajo peso, prematuridad, problemas respiratorios.</p><button onclick="navigate('#riesgos-bebe')" class="w-full bg-slate-50 py-3 rounded-xl hover:bg-medico-azul hover:text-white transition">Ver más</button></div>
+                        </div>
+                        <div class="bg-white rounded-2xl shadow-lg border flex flex-col h-full premium-card reveal fade-up delay-300 overflow-hidden">
+                            <div class="image-container h-48"><img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover"></div>
+                            <div class="p-8 flex-grow"><div class="bg-purple-50 text-medico-morado w-10 h-10 rounded-lg flex items-center justify-center mb-4 -mt-12"><i class="fa-solid fa-school"></i></div><h3 class="text-xl font-bold mb-3">Consecuencias sociales</h3><p class="text-slate-500 text-sm mb-6">Abandono escolar, dependencia económica.</p><button onclick="navigate('#consecuencias')" class="w-full bg-slate-50 py-3 rounded-xl hover:bg-medico-azul hover:text-white transition">Ver más</button></div>
+                        </div>
+                        <div class="bg-white rounded-2xl shadow-lg border flex flex-col h-full premium-card reveal fade-up delay-300 overflow-hidden">
+                            <div class="image-container h-48"><img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover"></div>
+                            <div class="p-8 flex-grow"><div class="bg-sky-50 text-sky-600 w-10 h-10 rounded-lg flex items-center justify-center mb-4 -mt-12"><i class="fa-solid fa-shield-halved"></i></div><h3 class="text-xl font-bold mb-3">Prevención</h3><p class="text-slate-500 text-sm mb-6">Educación sexual, métodos anticonceptivos.</p><button onclick="navigate('#prevencion')" class="w-full bg-slate-50 py-3 rounded-xl hover:bg-medico-azul hover:text-white transition">Ver más</button></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
