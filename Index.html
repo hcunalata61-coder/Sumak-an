@@ -82,13 +82,19 @@
         .float-fast { animation: floatAnim 4s ease-in-out infinite reverse; }
         @keyframes floatAnim { 0% { transform: translateY(0); } 50% { transform: translateY(-20px); } 100% { transform: translateY(0); } }
         .hero-gradient { background: linear-gradient(to right, rgba(15, 23, 42, 0.9), rgba(29, 78, 216, 0.6)); }
+        .logo-img { width: 40px; height: 40px; object-fit: contain; transition: transform 0.3s ease; }
+        .logo-img-sm { width: 36px; height: 36px; }
+        .group:hover .logo-img { transform: scale(1.05); }
+        .footer-logo-img { width: 48px; height: 48px; }
     </style>
 </head>
 <body class="antialiased flex flex-col min-h-screen">
 
     <!-- Preloader -->
     <div id="preloader">
-        <i class="fa-solid fa-heart-pulse text-medico-azul text-5xl mb-4 animate-pulse"></i>
+        <!-- Logo imagen (reemplazar src por tu propio logo) -->
+        <img src="imagneS/Recurso 3.svg"
+             alt="Logo SUMAK ÑAN" class="logo-img mb-4 animate-pulse">
         <h2 class="text-2xl font-extrabold text-slate-800 tracking-tight mb-6">SUMAK ÑAN</h2>
         <div class="spinner-ring"></div>
     </div>
@@ -100,10 +106,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0 flex items-center cursor-pointer group" onclick="navigate('#inicio')">
-                    <div class="w-10 h-10 bg-medico-azul rounded-lg flex items-center justify-center mr-3 shadow-lg group-hover:bg-blue-700 transition duration-300">
-                        <i class="fa-solid fa-heart-pulse text-white text-xl"></i>
+                    <!-- Logo imagen (reemplazar src por tu propio logo) -->
+                    <img src="imagnes/Recurso 3.svg"
+                         alt="Logo SUMAK ÑAN" class="logo-img mr-3 shadow-lg">
+                    <div>
+                        <h1 id="logo-text" class="font-extrabold text-2xl tracking-tight text-white transition-colors duration-300">SUMAK ÑAN</h1>
                     </div>
-                    <div><h1 id="logo-text" class="font-extrabold text-2xl tracking-tight text-white transition-colors duration-300">SUMAK ÑAN</h1></div>
                 </div>
 
                 <!-- Desktop Menu -->
@@ -176,7 +184,7 @@
 
         <!-- INICIO -->
         <div id="inicio" class="page-view active">
-            <section class="relative min-h-screen flex items-center justify-center bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1920');">
+            <section class="relative min-h-screen flex items-center justify-center bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/assets/2018/02/02-28-2018-PAHO-Indigenous-Peru-pregnant-02.jpg/image1170x530cropped.jpg');">
                 <div class="absolute inset-0 hero-gradient"></div>
                 <div class="absolute inset-0 overflow-hidden pointer-events-none z-10">
                     <i class="fa-solid fa-plus float-slow absolute top-1/4 left-10 text-white/10 text-6xl"></i>
@@ -259,15 +267,15 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         <div class="bg-white rounded-2xl shadow-lg border flex flex-col h-full premium-card reveal fade-up delay-100 overflow-hidden">
-                            <div class="image-container h-48"><img src="https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover"></div>
+                            <div class="image-container h-48"><img src="https://ecuador.unfpa.org/sites/default/files/styles/original/public/news/t1_1424961350.jpg?itok=aObj38FE" class="w-full h-full object-cover"></div>
                             <div class="p-8 flex-grow"><div class="bg-red-50 text-alerta-rojo w-10 h-10 rounded-lg flex items-center justify-center mb-4 -mt-12"><i class="fa-solid fa-female"></i></div><h3 class="text-xl font-bold mb-3">Riesgos para la madre</h3><p class="text-slate-500 text-sm mb-6">Anemia, preeclampsia, parto prematuro.</p><button onclick="navigate('#riesgos-madre')" class="w-full bg-slate-50 py-3 rounded-xl hover:bg-medico-azul hover:text-white transition">Ver más</button></div>
                         </div>
                         <div class="bg-white rounded-2xl shadow-lg border flex flex-col h-full premium-card reveal fade-up delay-200 overflow-hidden">
-                            <div class="image-container h-48"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover"></div>
+                            <div class="image-container h-48"><img src="https://www.radiopichincha.com/wp-content/uploads/2025/01/embarazo-en-ninas.jpg" class="w-full h-full object-cover"></div>
                             <div class="p-8 flex-grow"><div class="bg-blue-50 text-medico-azul w-10 h-10 rounded-lg flex items-center justify-center mb-4 -mt-12"><i class="fa-solid fa-baby-carriage"></i></div><h3 class="text-xl font-bold mb-3">Riesgos para el bebé</h3><p class="text-slate-500 text-sm mb-6">Bajo peso, prematuridad, problemas respiratorios.</p><button onclick="navigate('#riesgos-bebe')" class="w-full bg-slate-50 py-3 rounded-xl hover:bg-medico-azul hover:text-white transition">Ver más</button></div>
                         </div>
                         <div class="bg-white rounded-2xl shadow-lg border flex flex-col h-full premium-card reveal fade-up delay-300 overflow-hidden">
-                            <div class="image-container h-48"><img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover"></div>
+                            <div class="image-container h-48"><img src="https://www.gaceta.unam.mx/wp-content/uploads/2021/09/210913-aca6-des-f1-salud-sexual-1.jpg" class="w-full h-full object-cover"></div>
                             <div class="p-8 flex-grow"><div class="bg-purple-50 text-medico-morado w-10 h-10 rounded-lg flex items-center justify-center mb-4 -mt-12"><i class="fa-solid fa-school"></i></div><h3 class="text-xl font-bold mb-3">Consecuencias sociales</h3><p class="text-slate-500 text-sm mb-6">Abandono escolar, dependencia económica.</p><button onclick="navigate('#consecuencias')" class="w-full bg-slate-50 py-3 rounded-xl hover:bg-medico-azul hover:text-white transition">Ver más</button></div>
                         </div>
                         <div class="bg-white rounded-2xl shadow-lg border flex flex-col h-full premium-card reveal fade-up delay-300 overflow-hidden">
@@ -282,7 +290,7 @@
         <!-- NOSOTROS -->
         <div id="nosotros" class="page-view">
             <div class="relative pt-32 pb-20 bg-slate-900 overflow-hidden">
-                <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1551076805-e18690c5e561?auto=format&fit=crop&q=80&w=1920');"></div>
+                <div class="absolute inset-0 opacity-30 bg-cover bg-center" style="background-image: url('https://www.salud.gob.ec/wp-content/uploads/2023/03/001-1024x576.jpg');"></div>
                 <div class="absolute inset-0 bg-gradient-to-b from-slate-900/80 to-slate-900"></div>
                 <div class="max-w-5xl mx-auto px-4 text-center relative z-10 reveal fade-up">
                     <span class="text-blue-400 font-bold tracking-widest uppercase text-sm mb-3 block">Proyecto educativo</span>
@@ -292,7 +300,7 @@
             </div>
             <div class="max-w-6xl mx-auto px-4 py-20">
                 <div class="flex flex-col md:flex-row gap-16 items-center mb-20">
-                    <div class="md:w-1/2 reveal fade-right"><div class="image-container shadow-premium border-4 border-white rounded-[2rem]"><img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&q=80&w=800" class="w-full object-cover"></div></div>
+                    <div class="md:w-1/2 reveal fade-right"><div class="image-container shadow-premium border-4 border-white rounded-[2rem]"><img src="https://www.salud.gob.ec/wp-content/uploads/2023/03/001-1024x576.jpg" class="w-full object-cover"></div></div>
                     <div class="md:w-1/2 text-slate-600 text-lg leading-relaxed reveal fade-left">
                         <h2 class="text-3xl font-extrabold text-slate-800 mb-6">Nuestro compromiso</h2>
                         <p class="mb-4">Brindamos información clara, confiable y accesible para prevenir embarazos tempranos y fomentar estilos de vida saludables.</p>
@@ -311,7 +319,7 @@
         <!-- ¿QUÉ ES EL EMBARAZO ADOLESCENTE? -->
         <div id="que-es" class="page-view">
             <div class="relative pt-32 pb-20 bg-slate-900 overflow-hidden">
-                <div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1531983412531-1f49a365ffed?auto=format&fit=crop&q=80&w=1920');"></div>
+                <div class="absolute inset-0 opacity-20 bg-cover bg-center" style="background-image: url('https://assets.lahora.com.ec/__export/1744770260187/sites/lahora/img/2025/04/15/20250415_082412585_Embarazo_adolescente_en_aumento_y_nula_planificacixn_familiar.jpg_107571034.jpg');"></div>
                 <div class="max-w-5xl mx-auto px-4 text-center relative z-10 reveal fade-up">
                     <span class="bg-medico-azul/20 border border-blue-500/50 text-blue-300 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest mb-6 inline-flex"><i class="fa-solid fa-book-medical mr-2"></i> Definición</span>
                     <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">¿Qué es el embarazo adolescente?</h1>
@@ -321,7 +329,7 @@
             <div class="max-w-5xl mx-auto px-4 py-20 text-slate-700">
                 <div class="flex flex-col md:flex-row gap-16 mb-12">
                     <div class="md:w-3/5 reveal fade-right"><p class="text-lg leading-relaxed mb-6">El embarazo adolescente representa un problema de salud pública debido a las complicaciones que puede ocasionar tanto para la madre como para el bebé. En Ecuador, miles de adolescentes experimentan embarazos cada año, especialmente en sectores vulnerables y con acceso limitado a educación sexual y servicios de salud.</p><div class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-l-medico-azul"><h4 class="font-bold text-slate-800 text-lg mb-3"><i class="fa-solid fa-chart-line text-medico-azul mr-3"></i> Realidad ecuatoriana</h4><p class="text-slate-600">Según datos del INEC, alrededor de 1 de cada 5 embarazos en el país corresponde a adolescentes, con mayor incidencia en zonas rurales de la Sierra.</p></div></div>
-                    <div class="md:w-2/5 reveal fade-left"><div class="image-container shadow-premium rounded-[2rem] h-full min-h-[400px]"><img src="https://images.unsplash.com/photo-1579684453423-f84349ef60b0?auto=format&fit=crop&q=80&w=600" class="w-full h-full object-cover"></div></div>
+                    <div class="md:w-2/5 reveal fade-left"><div class="image-container shadow-premium rounded-[2rem] h-full min-h-[400px]"><img src="https://www.nacion.com/resizer/v2/5O7IHNQDHJHDXBSW3CVUAK6NGI.jpg?smart=true&auth=3fefbf0372949479a026b18053c6d53f467ef75890e02a2d9c7d55f2deadab73&width=1440&height=961" class="w-full h-full object-cover"></div></div>
                 </div>
             </div>
         </div>
@@ -350,7 +358,7 @@
                         <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4">Riesgos para la madre</h1>
                         <p class="text-xl text-slate-600">Complicaciones obstétricas graves por inmadurez biológica.</p>
                     </div>
-                    <div class="md:w-5/12 reveal fade-left"><div class="image-container shadow-xl rounded-[2rem] border-4 border-white"><img src="https://images.unsplash.com/photo-1584362917165-526a968579e8?auto=format&fit=crop&q=80&w=800" class="w-full h-64 object-cover"></div></div>
+                    <div class="md:w-5/12 reveal fade-left"><div class="image-container shadow-xl rounded-[2rem] border-4 border-white"><img src="https://ecuador.unfpa.org/sites/default/files/styles/original/public/news/t1_1424961350.jpg?itok=aObj38FE" class="w-full h-64 object-cover"></div></div>
                 </div>
             </div>
             <div class="max-w-5xl mx-auto px-4 py-20">
@@ -369,7 +377,7 @@
         <div id="riesgos-bebe" class="page-view">
             <div class="relative pt-32 pb-20 bg-blue-50 border-b border-blue-100">
                 <div class="max-w-6xl mx-auto px-4 flex flex-col-reverse md:flex-row items-center">
-                    <div class="md:w-5/12 mt-10 md:mt-0 reveal fade-right"><div class="image-container shadow-xl rounded-[2rem] border-4 border-white"><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&q=80&w=800" class="w-full h-64 object-cover"></div></div>
+                    <div class="md:w-5/12 mt-10 md:mt-0 reveal fade-right"><div class="image-container shadow-xl rounded-[2rem] border-4 border-white"><img src="https://www.radiopichincha.com/wp-content/uploads/2025/01/embarazo-en-ninas.jpg" class="w-full h-64 object-cover"></div></div>
                     <div class="md:w-1/2 text-left reveal fade-left"><span class="bg-white text-medico-azul border border-blue-200 px-4 py-1.5 rounded-full font-bold uppercase text-xs mb-4 inline-flex"><i class="fa-solid fa-baby-carriage mr-2"></i>Neonatología</span><h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4">Riesgos para el bebé</h1><p class="text-xl text-slate-600">Complicaciones perinatales y morbilidad infantil.</p></div>
                 </div>
             </div>
@@ -427,7 +435,7 @@
             </div>
         </div>
 
-        <!-- URGENCIAS (señales de alarma médica) -->
+        <!-- URGENCIAS -->
         <div id="urgencias" class="page-view">
             <div class="relative pt-32 pb-20 bg-alerta-rojo overflow-hidden">
                 <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between relative z-10">
@@ -461,16 +469,23 @@
 
     </main>
 
-    <!-- FOOTER COMPLETO con watermark y redes -->
+    <!-- FOOTER -->
     <footer class="bg-slate-900 text-slate-300 pt-20 pb-10 border-t-[8px] border-medico-azul relative overflow-hidden">
-        <!-- Watermark: corazón gigante de fondo -->
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-5 pointer-events-none">
             <i class="fa-solid fa-heart-pulse text-[30rem] text-white"></i>
         </div>
-
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-                <div><div class="flex items-center mb-6 cursor-pointer" onclick="navigate('#inicio')"><div class="bg-medico-azul p-3 rounded-xl mr-4"><i class="fa-solid fa-heart-pulse text-white text-2xl"></i></div><h2 class="font-extrabold text-3xl text-white">SUMAK ÑAN</h2></div><p class="text-sm text-slate-400 mb-6 border-l-2 border-medico-azul pl-4">Información confiable para prevenir el embarazo adolescente y proteger la salud de la madre y el bebé.</p><div class="bg-slate-800/50 p-4 rounded-xl"><p class="text-xs text-slate-400 uppercase font-bold">Acreditación</p><p class="text-sm text-white flex items-center"><i class="fa-solid fa-certificate text-medico-azul mr-2"></i> Certificado de Excelencia 2026</p></div></div>
+                <div>
+                    <div class="flex items-center mb-6 cursor-pointer group" onclick="navigate('#inicio')">
+                        <!-- Logo imagen en footer (reemplazar src por tu propio logo) -->
+                        <img src="imagnes/Recurso 3.svg"
+                             alt="Logo SUMAK ÑAN" class="footer-logo-img mr-4 shadow-lg">
+                        <h2 class="font-extrabold text-3xl text-white">SUMAK ÑAN</h2>
+                    </div>
+                    <p class="text-sm text-slate-400 mb-6 border-l-2 border-medico-azul pl-4">Información confiable para prevenir el embarazo adolescente y proteger la salud de la madre y el bebé.</p>
+                    <div class="bg-slate-800/50 p-4 rounded-xl"><p class="text-xs text-slate-400 uppercase font-bold">Acreditación</p><p class="text-sm text-white flex items-center"><i class="fa-solid fa-certificate text-medico-azul mr-2"></i> Certificado de Excelencia 2026</p></div>
+                </div>
                 <div><h3 class="text-white font-extrabold text-lg mb-6 uppercase tracking-wider flex items-center"><i class="fa-solid fa-compass text-medico-azul mr-3"></i> Navegación</h3><ul class="space-y-2 text-sm"><li><button onclick="navigate('#inicio')" class="hover:text-white transition">Inicio</button></li><li><button onclick="navigate('#nosotros')" class="hover:text-white transition">Nosotros</button></li><li><button onclick="navigate('#que-es')" class="hover:text-white transition">¿Qué es?</button></li><li><button onclick="navigate('#causas')" class="hover:text-white transition">Causas</button></li><li><button onclick="navigate('#prevencion')" class="hover:text-white transition">Prevención</button></li><li><button onclick="navigate('#recursos')" class="hover:text-white transition">Recursos</button></li></ul></div>
                 <div><h3 class="text-white font-extrabold text-lg mb-6 uppercase tracking-wider flex items-center"><i class="fa-solid fa-map-location-dot text-medico-azul mr-3"></i> Contacto</h3><ul class="space-y-3 text-sm"><li class="flex items-start"><div class="bg-slate-800 p-2 rounded-lg mr-3"><i class="fa-solid fa-building text-medico-azul"></i></div><span class="text-slate-400">Edificio Medical Core, Nivel 4<br>Quito, Ecuador</span></li><li class="flex items-center"><div class="bg-slate-800 p-2 rounded-lg mr-3"><i class="fa-solid fa-envelope text-slate-400"></i></div><a href="mailto:info@sumaknan.org.ec" class="hover:text-white">info@sumaknan.org.ec</a></li><li class="flex items-center"><div class="bg-slate-800 p-2 rounded-lg mr-3"><i class="fa-solid fa-phone text-slate-400"></i></div><span class="hover:text-white">+593 2 999 0000</span></li></ul></div>
                 <div><h3 class="text-white font-extrabold text-lg mb-6 uppercase tracking-wider flex items-center"><i class="fa-solid fa-satellite-dish text-medico-azul mr-3"></i> Divulgación</h3><p class="text-sm text-slate-400 mb-6">Únete para recibir información preventiva semanal.</p><div class="flex flex-wrap gap-3"><a href="#" class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#1877F2] hover:text-white hover:-translate-y-2 transition-all"><i class="fa-brands fa-facebook-f text-xl"></i></a><a href="#" class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-gradient-to-tr hover:from-[#f09433] hover:to-[#bc1888] hover:text-white hover:-translate-y-2 transition-all"><i class="fa-brands fa-instagram text-xl"></i></a><a href="#" class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-black hover:text-white hover:-translate-y-2 transition-all"><i class="fa-brands fa-tiktok text-xl"></i></a><a href="#" class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#FF0000] hover:text-white hover:-translate-y-2 transition-all"><i class="fa-brands fa-youtube text-xl"></i></a><a href="#" class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-[#25D366] hover:text-white hover:-translate-y-2 transition-all"><i class="fa-brands fa-whatsapp text-xl"></i></a></div></div>
@@ -488,7 +503,7 @@
         window.addEventListener('DOMContentLoaded', () => { const hash = window.location.hash || '#inicio'; document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active')); const target = document.querySelector(hash); if(target) target.classList.add('active'); else document.getElementById('inicio').classList.add('active'); });
         function handleRouting() { const hash = window.location.hash || '#inicio'; document.getElementById('page-transition').classList.add('active'); setTimeout(() => { document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active')); const target = document.querySelector(hash); if(target) target.classList.add('active'); else document.getElementById('inicio').classList.add('active'); document.querySelectorAll('.reveal').forEach(el => el.classList.remove('active')); window.scrollTo(0,0); document.getElementById('page-transition').classList.remove('active'); setTimeout(revealOnScroll, 100); if(!document.getElementById('mobile-menu').classList.contains('hidden')) document.getElementById('mobile-menu').classList.add('hidden'); }, 600); }
         function revealOnScroll() { const reveals = document.querySelectorAll('.page-view.active .reveal'); const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 }); reveals.forEach(reveal => observer.observe(reveal)); }
-        window.addEventListener('scroll', () => { const winScroll = document.documentElement.scrollTop; const height = document.documentElement.scrollHeight - document.documentElement.clientHeight; document.getElementById("reading-progress").style.width = (winScroll / height) * 100 + "%"; const nav = document.getElementById('main-nav'); const logoText = document.getElementById('logo-text'); if (winScroll > 50) { nav.classList.remove('nav-transparent'); nav.classList.add('nav-solid'); logoText.classList.add('text-medico-azul'); logoText.classList.remove('text-white'); document.querySelectorAll('.nav-link').forEach(l => l.classList.add('text-slate-700')); document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('text-white')); } else { nav.classList.remove('nav-solid'); nav.classList.add('nav-transparent'); logoText.classList.remove('text-medico-azul'); logoText.classList.add('text-white'); document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('text-slate-700')); document.querySelectorAll('.nav-link').forEach(l => l.classList.add('text-white')); } const backBtn = document.getElementById('btn-back-to-top'); if (winScroll > 500) { backBtn.classList.remove('scale-0'); backBtn.classList.add('scale-100'); } else { backBtn.classList.remove('scale-100'); backBtn.classList.add('scale-0'); } });
+        window.addEventListener('scroll', () => { const winScroll = document.documentElement.scrollTop; const height = document.documentElement.scrollHeight - document.documentElement.clientHeight; document.getElementById("reading-progress").style.width = (winScroll / height) * 100 + "%"; const nav = document.getElementById('main-nav'); const logoText = document.getElementById('logo-text'); const navLinks = document.querySelectorAll('.nav-link'); const dropdownBtns = document.querySelectorAll('.nav-dropdown-btn'); if (winScroll > 50) { nav.classList.remove('nav-transparent'); nav.classList.add('nav-solid'); logoText.classList.add('text-medico-azul'); logoText.classList.remove('text-white'); navLinks.forEach(l => { l.classList.add('text-slate-700'); l.classList.remove('text-white'); }); dropdownBtns.forEach(btn => { btn.classList.add('text-slate-700'); btn.classList.remove('text-white'); }); } else { nav.classList.remove('nav-solid'); nav.classList.add('nav-transparent'); logoText.classList.remove('text-medico-azul'); logoText.classList.add('text-white'); navLinks.forEach(l => { l.classList.remove('text-slate-700'); l.classList.add('text-white'); }); dropdownBtns.forEach(btn => { btn.classList.remove('text-slate-700'); btn.classList.add('text-white'); }); } const backBtn = document.getElementById('btn-back-to-top'); if (winScroll > 500) { backBtn.classList.remove('scale-0'); backBtn.classList.add('scale-100'); } else { backBtn.classList.remove('scale-100'); backBtn.classList.add('scale-0'); } });
         document.getElementById('btn-back-to-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         document.getElementById('mobile-menu-btn').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('hidden'); });
         const counters = document.querySelectorAll('.counter-value'); const counterObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) { const target = +entry.target.getAttribute('data-target'); let count = 0; const increment = target / 30; const update = () => { count += increment; if(count < target) { entry.target.innerText = Math.ceil(count); requestAnimationFrame(update); } else entry.target.innerText = target; }; update(); counterObserver.unobserve(entry.target); } }); }, { threshold: 0.5 }); counters.forEach(c => counterObserver.observe(c));
